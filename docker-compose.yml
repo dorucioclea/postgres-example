@@ -9,9 +9,13 @@ volumes:
   dbdata:
     external: false # Create the volume if it doesn't exist
     name: dbdata
+  pgadmin_data:
+    external: false
+    name: pgadmin_data
 
 services:
-  db: 
+  postgres: 
+    hostname: postgres
     image: "postgres:12.1"
     restart: on-failure
     environment:
@@ -24,3 +28,4 @@ services:
       - 5432
     networks:
       - internal
+  
