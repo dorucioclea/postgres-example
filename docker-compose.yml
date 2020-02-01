@@ -1,0 +1,26 @@
+version: '3.7'
+
+networks:
+  internal:
+    external: false # Create the volume if it doesn't exist
+    name: infrastructure_network
+
+volumes:
+  dbdata:
+    external: false # Create the volume if it doesn't exist
+    name: dbdata
+
+services:
+  db: 
+    image: "postgres:12.1"
+    restart: on-failure
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-passwd}
+      - POSTGRES_DB=TestDatabase
+    volumes: 
+      - dbdata:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    networks:
+      - internal
