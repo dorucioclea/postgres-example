@@ -36,6 +36,7 @@ services:
       PGADMIN_SERVER_JSON_FILE: "/pgadmin4/servers.json"
     volumes:
       - ./servers.json:/pgadmin4/servers.json:rw
+      - pgadmin_data:/var/lib/pgadmin
     networks:
       - internal
     ports:
